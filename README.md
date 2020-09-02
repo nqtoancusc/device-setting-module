@@ -1,0 +1,1 @@
+This module id developed on Django Rest Framework and provides device setting information through REST APIs. These APIs will be consumed by face recognition module then.

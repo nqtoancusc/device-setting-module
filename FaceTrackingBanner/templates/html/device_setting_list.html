@@ -1,0 +1,31 @@
+
+
+<a href="/create-device-setting">Create device setting</a>
+
+<br><br>
+
+<form action="" method="GET">
+    <input type="search" name="device_id">
+    <button type="submit">Search</button>
+</form>
+
+{% for item in device_setting_objects %}
+    <a href="/update-device-setting/{{ item.id }}">{{ item.device_id }}</a>
+    <br>
+{% endfor %}
+
+<br>
+
+Page: {{ device_setting_objects.number }} of {{ device_setting_objects.paginator.num_pages }}
+
+<br>
+
+{% if device_setting_objects.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ device_setting_objects.previous_page_number }}">Previous</a>
+{% endif %}
+
+{% if device_setting_objects.has_next %}
+    <a href="?page={{ device_setting_objects.next_page_number }}">Next</a>
+    <a href="?page={{ device_setting_objects.paginator.num_pages }}">Last</a>
+{% endif %}
