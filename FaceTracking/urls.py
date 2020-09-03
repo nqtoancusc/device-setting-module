@@ -20,8 +20,8 @@ from FaceTrackingBanner.views import SettingsViewset, SettingViewset
 from FaceTrackingBanner import views
 
 router = routers.SimpleRouter()
-router.register('settings',SettingsViewset, basename='Setting')
-router.register('setting',SettingViewset, basename='Setting')
+router.register('api/v1/settings',SettingsViewset, basename='Setting')
+router.register('api/v1/setting',SettingViewset, basename='Setting')
 
 urlpatterns = [
     path('',include(router.urls)),
