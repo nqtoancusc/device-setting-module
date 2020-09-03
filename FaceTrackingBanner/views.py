@@ -6,7 +6,6 @@ from .models import Setting
 from django_filters.rest_framework import DjangoFilterBackend
 from .forms import SettingForm
 
-# Create your views here.
 class SettingsViewset(viewsets.ModelViewSet):
     queryset = Setting.objects.all();
     serializer_class = SettingSerilizer
@@ -23,20 +22,22 @@ class SettingViewset(viewsets.ModelViewSet):
         return queryset
 
 def device_setting_list(request):
+    # Render a list of device settings
     device_setting_objects = Setting.objects.all();
 
     device_id = request.GET.get('device_id');
     if device_id != '' and device_id is not None:
-        device_setting_objects = device_setting_objects.filter(device_id__icontains=device_id) # To search by exact keyword, use device_id__icontains=device_id
+        device_setting_objects = device_setting_objects.filter(device_id__icontains=device_id)
 
     # Each page render 10 records
-    paginator = Paginator(device_setting_objects,10)
+    paginator = Paginator(device_setting_objects, 10)
     page = request.GET.get('page');
     device_setting_objects = paginator.get_page(page)
 
     return render(request,'html/device_setting_list.html',{'device_setting_objects':device_setting_objects});
 
 def create_device_setting(request):
+    # Render create device setting form and save form data
     form = SettingForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -45,6 +46,7 @@ def create_device_setting(request):
     return render(request,'html/create_device_setting.html',{'form':form})
 
 def update_device_setting(request, id):
+    # Render update device setting form and save form data
     setting = Setting.objects.get(id=id)
     form = SettingForm(request.POST or None, instance=setting)
     if form.is_valid():
